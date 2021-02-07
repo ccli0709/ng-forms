@@ -1,59 +1,58 @@
-<p>You can easily control dropdowns programmatically using the exported dropdown instance.</p>
+<p-toast></p-toast>
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="mt-3">
 
-<div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
-  <button class="btn btn-outline-primary mr-2" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">Toggle dropdown</button>
-  <div ngbDropdownMenu aria-labelledby="dropdownManual">
-    <button ngbDropdownItem>Action - 1</button>
-    <button ngbDropdownItem>Another Action</button>
-    <button ngbDropdownItem>Something else is here</button>
+  <div class="form-row">
+    <div class="col">
+      <label for="inputFirstName">First Name</label>
+      <input type="text" formControlName="firstName" class="form-control" id="inputFirstName">
+    </div>
+    <div class="col">
+      <label for="inputLastName">Last Name</label>
+      <input type="text" formControlName="lastName" class="form-control" id="inputLastName">
+    </div>
   </div>
-</div>
-
-<button class="btn btn-outline-success mr-2" (click)="$event.stopPropagation(); myDrop.open();">Open from outside</button>
-<button class="btn btn-outline-danger mr-2" (click)="$event.stopPropagation(); myDrop.close();">Close from outside</button>
-
-<p>reactive-form works!</p>
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-
-  <label>
-    First Name:
-    <input type="text" formControlName="firstName">
-  </label>
-
-  <label>
-    Last Name:
-    <input type="text" formControlName="lastName">
-  </label>
-  <div formGroupName="address">
+  <div formGroupName="address" class="mt-3">
     <h3>Address</h3>
-
-    <label>
-      Street:
-      <input type="text" formControlName="street">
-    </label>
-
-    <label>
-      City:
-      <input type="text" formControlName="city">
-    </label>
-
-    <label>
-      State:
-      <input type="text" formControlName="state">
-    </label>
-
-    <label>
-      Zip Code:
-      <input type="text" formControlName="zip">
-    </label>
+    <div class="form-row">
+      <div class="col">
+        <label for="inputStreet">Street</label>
+        <input type="text" formControlName="street" class="form-control" id="inputStreet">
+      </div>
+      <div class="col">
+        <label for="inputCity">City</label>
+        <input type="text" formControlName="city" class="form-control" id="inputCity">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col">
+        <label for="inputState">State</label>
+        <input type="text" formControlName="state" class="form-control" id="inputState">
+      </div>
+      <div class="col">
+        <label for="inputZip">Zip</label>
+        <input type="text" formControlName="city" class="form-control" id="inputZip">
+      </div>
+    </div>
+  </div>
+  <div class="form-row mt-5">
+    <div class="col">
+      <span class="p-buttonset">
+        <button pButton type="button" class="p-button-raised p-button-secondary" icon="pi pi-search" label="查詢" (click)="updateProfile()"></button>
+        <button pButton type="button" class="p-button-raised p-button-pirmary" icon="pi pi-plus-circle" label="新增" (click)="updateProfile()"></button>
+        <button pButton type="button" class="p-button-raised p-button-warning" icon="pi pi-pencil" label="修改" (click)="updateProfile()"></button>
+        <button pButton type="button" class="p-button-raised p-button-danger" icon="pi pi-times-circle" label="刪除" (click)="updateProfile()"></button>
+      </span>
+    </div>
+    <div class="col"> Form Status: {{ profileForm.status }}</div>
+  </div>
+  <div class="form-row">
+    <div class="col">
+      <p-messages></p-messages>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col">
+      Form Status: {{ profileForm.value | json }}
+    </div>
   </div>
 </form>
-<p>
-  Form Status: {{ profileForm.value | json }}
-</p>
-<p>
-  Form Status: {{ profileForm.status }}
-</p>
-<p>
-  <button (click)="updateProfile()">Update Profile</button>
-</p>
